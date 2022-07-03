@@ -1,0 +1,247 @@
+---
+devops:
+  cidr: 172.10.0.0/16
+  region: sa-east-1
+  biggest_azs_region: 2
+  total_subnets: 6
+  subnets:
+    public:
+      sa-east-1:
+        sa-east-1a: 172.10.0.0/19
+        sa-east-1b: 172.10.32.0/19
+    private:
+      sa-east-1:
+        sa-east-1a: 172.10.64.0/19
+        sa-east-1b: 172.10.96.0/19
+    lambda:
+      sa-east-1:
+        sa-east-1a: 172.10.128.0/19
+        sa-east-1b: 172.10.160.0/19
+sharedtools:
+  cidr: 100.100.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.100.0.0/20
+        us-east-1b: 100.100.16.0/20
+        us-east-1c: 100.100.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.100.48.0/20
+        us-east-1b: 100.100.64.0/20
+        us-east-1c: 100.100.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.100.96.0/20
+        us-east-1b: 100.100.112.0/20
+        us-east-1c: 100.100.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.100.144.0/20
+        us-east-1b: 100.100.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.100.176.0/20
+        us-east-1b: 100.100.192.0/20
+nickel:
+  cidr: 100.101.0.0/16
+  region: us-east-1
+  biggest_azs_region: 2
+  total_subnets: 10
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.101.0.0/20
+        us-east-1b: 100.101.16.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.101.32.0/20
+        us-east-1b: 100.101.48.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.101.64.0/20
+        us-east-1b: 100.101.80.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.101.96.0/20
+        us-east-1b: 100.101.112.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.101.128.0/20
+        us-east-1b: 100.101.144.0/20
+snd:
+  cidr: 100.102.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 12
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.102.0.0/20
+        us-east-1b: 100.102.16.0/20
+        us-east-1c: 100.102.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.102.48.0/20
+        us-east-1b: 100.102.64.0/20
+        us-east-1c: 100.102.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.102.96.0/20
+        us-east-1b: 100.102.112.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.102.128.0/20
+        us-east-1b: 100.102.144.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.102.160.0/20
+        us-east-1b: 100.102.176.0/20
+dev:
+  cidr: 100.103.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.103.0.0/20
+        us-east-1b: 100.103.16.0/20
+        us-east-1c: 100.103.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.103.48.0/20
+        us-east-1b: 100.103.64.0/20
+        us-east-1c: 100.103.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.103.96.0/20
+        us-east-1b: 100.103.112.0/20
+        us-east-1c: 100.103.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.103.144.0/20
+        us-east-1b: 100.103.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.103.176.0/20
+        us-east-1b: 100.103.192.0/20
+sit:
+  cidr: 100.104.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.104.0.0/20
+        us-east-1b: 100.104.16.0/20
+        us-east-1c: 100.104.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.104.48.0/20
+        us-east-1b: 100.104.64.0/20
+        us-east-1c: 100.104.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.104.96.0/20
+        us-east-1b: 100.104.112.0/20
+        us-east-1c: 100.104.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.104.144.0/20
+        us-east-1b: 100.104.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.104.176.0/20
+        us-east-1b: 100.104.192.0/20
+perf:
+  cidr: 100.105.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.105.0.0/20
+        us-east-1b: 100.105.16.0/20
+        us-east-1c: 100.105.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.105.48.0/20
+        us-east-1b: 100.105.64.0/20
+        us-east-1c: 100.105.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.105.96.0/20
+        us-east-1b: 100.105.112.0/20
+        us-east-1c: 100.105.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.105.144.0/20
+        us-east-1b: 100.105.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.105.176.0/20
+        us-east-1b: 100.105.192.0/20
+pre:
+  cidr: 100.106.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.106.0.0/20
+        us-east-1b: 100.106.16.0/20
+        us-east-1c: 100.106.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.106.48.0/20
+        us-east-1b: 100.106.64.0/20
+        us-east-1c: 100.106.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.106.96.0/20
+        us-east-1b: 100.106.112.0/20
+        us-east-1c: 100.106.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.106.144.0/20
+        us-east-1b: 100.106.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.106.176.0/20
+        us-east-1b: 100.106.192.0/20
+prod:
+  cidr: 100.107.0.0/16
+  region: us-east-1
+  biggest_azs_region: 3
+  total_subnets: 13
+  subnets:
+    public:
+      us-east-1:
+        us-east-1a: 100.107.0.0/20
+        us-east-1b: 100.107.16.0/20
+        us-east-1c: 100.107.32.0/20
+    private:
+      us-east-1:
+        us-east-1a: 100.107.48.0/20
+        us-east-1b: 100.107.64.0/20
+        us-east-1c: 100.107.80.0/20
+    lambda:
+      us-east-1:
+        us-east-1a: 100.107.96.0/20
+        us-east-1b: 100.107.112.0/20
+        us-east-1c: 100.107.128.0/20
+    database:
+      us-east-1:
+        us-east-1a: 100.107.144.0/20
+        us-east-1b: 100.107.160.0/20
+    elasticache:
+      us-east-1:
+        us-east-1a: 100.107.176.0/20
+        us-east-1b: 100.107.192.0/20
