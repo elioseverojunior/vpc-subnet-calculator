@@ -1,17 +1,14 @@
 ---
 sharedtools:
   cidr: 100.100.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
-    lambda: 3
+    private: 2
+    lambda: 2
     database: 2
-    elasticache: 2
 nickel:
   cidr: 100.101.0.0/16
   region: us-east-1
@@ -19,93 +16,65 @@ nickel:
     - a
     - b
   subnets:
-    public: 2
+    private: 2
+    lambda: 2
+sandbox:
+  cidr: 100.102.0.0/16
+  region: us-east-2
+  azs:
+    - a
+    - b
+  subnets:
     private: 2
     lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
-snd:
-  cidr: 100.102.0.0/16
-  region: us-east-1
-  azs:
-    - a
-    - b
-    - c
-  subnets:
-    public: 3
-    private: 3
-    lambda: 2
-    database: 2
-    elasticache: 2
-    redshift: 2
 dev:
   cidr: 100.103.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
+    private: 2
     lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
 sit:
   cidr: 100.104.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
+    private: 2
     lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
 perf:
   cidr: 100.105.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
-    lambda: 3
+    private: 2
+    lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
 pre:
   cidr: 100.106.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
-    lambda: 3
+    private: 2
+    lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
 prod:
   cidr: 100.107.0.0/16
-  region: us-east-1
+  region: us-east-2
   azs:
     - a
     - b
-    - c
   subnets:
-    public: 3
-    private: 3
-    lambda: 3
+    private: 2
+    lambda: 2
     database: 2
-    elasticache: 2
-    redshift: 2
