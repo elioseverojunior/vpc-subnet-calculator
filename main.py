@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    main.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: elio.severo <elio.severo@nutrien.com>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/19 18:56:10 by elio.severo       #+#    #+#              #
+#    Updated: 2022/09/19 19:20:29 by elio.severo      ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #!/usr/bin/env python3
 
 import argparse
@@ -9,6 +21,9 @@ from ipaddress import IPv4Network
 
 from ruamel.yaml import YAML
 from ruamel.yaml.representer import RoundTripRepresenter
+from enum import Enum
+from dataclasses import dataclass
+from typing import Any, List, Optional, TypeVar, Callable, Type, cast
 
 __version__ = '1.0.0'
 __Company__ = 'Elio Severo Junior'
@@ -21,6 +36,123 @@ LOGGING_LEVELS = {
     'error': logging.ERROR,
     'critical': logging.CRITICAL,
 }
+
+# To use this code, make sure you
+#
+#     import json
+#
+# and then, to convert JSON from a string, do
+#
+#     result = cidr_block_configurations_from_dict(json.loads(json_string))
+
+
+T = TypeVar("T")
+EnumT = TypeVar("EnumT", bound=Enum)
+
+
+def from_int(x: Any) -> int:
+    assert isinstance(x, int) and not isinstance(x, bool)
+    return x
+
+
+def from_str(x: Any) -> str:
+    assert isinstance(x, str)
+    return x
+
+
+def from_list(f: Callable[[Any], T], x: Any) -> List[T]:
+    assert isinstance(x, list)
+    return [f(y) for y in x]
+
+
+def from_none(x: Any) -> Any:
+    assert x is None
+    return x
+
+
+def from_union(fs, x):
+    for f in fs:
+        try:
+            return f(x)
+        except Exception as ex:
+            logger.error(ex)
+            pass
+    assert False
+
+
+def to_enum(c: Type[EnumT], x: Any) -> EnumT:
+    assert isinstance(x, c)
+    return x.value
+
+
+def to_class(c: Type[T], x: Any) -> dict:
+    assert isinstance(x, c)
+    return cast(Any, x).to_dict()
+
+
+class Az(Enum):
+    A = "a"
+    B = "b"
+    C = "c"
+    D = "d"
+    E = "e"
+    F = "f"
+
+
+@dataclass
+class Subnets:
+    private: int
+    subnets_lambda: int
+    database: int
+
+    @staticmethod
+    def from_dict(obj: Any) -> 'Subnets':
+        assert isinstance(obj, dict)
+        private = from_int(obj.get("private"))
+        subnets_lambda = from_int(obj.get("lambda"))
+        database = from_int(obj.get("database"))
+        return Subnets(private, subnets_lambda, database)
+
+    def to_dict(self) -> dict:
+        result: dict = {"private": from_int(self.private), "lambda": from_int(self.subnets_lambda),
+                        "database": from_int(self.database)}
+        return result
+
+
+@dataclass
+class CIDRBlockConfiguration:
+    environment: str
+    cidr: str
+    region: str
+    azs: List[Az]
+    subnets: Subnets
+    subnet_bits: Optional[int] = None
+
+    @staticmethod
+    def from_dict(obj: Any) -> 'CIDRBlockConfiguration':
+        assert isinstance(obj, dict)
+        environment = from_str(obj.get("environment"))
+        cidr = from_str(obj.get("cidr"))
+        region = from_str(obj.get("region"))
+        azs = from_list(Az, obj.get("azs"))
+        subnets = Subnets.from_dict(obj.get("subnets"))
+        subnet_bits = from_union([from_int, from_none], obj.get("subnet_bits"))
+        return CIDRBlockConfiguration(environment, cidr, region, azs, subnets, subnet_bits)
+
+    def to_dict(self) -> dict:
+        result: dict = {"environment": from_str(self.environment), "cidr": from_str(self.cidr),
+                        "region": from_str(self.region), "azs": from_list(lambda x: to_enum(Az, x), self.azs),
+                        "subnets": to_class(Subnets, self.subnets),
+                        "subnet_bits": from_union([from_int, from_none], self.subnet_bits)}
+        return result
+
+
+def cidr_block_configurations_from_dict(s: Any) -> List[CIDRBlockConfiguration]:
+    return from_list(CIDRBlockConfiguration.from_dict, s)
+
+
+def cidr_block_configurations_to_dict(x: List[CIDRBlockConfiguration]) -> Any:
+    return from_list(lambda x: to_class(CIDRBlockConfiguration, x), x)
 
 
 class ValidateOutPutDir(argparse.Action):
@@ -49,14 +181,23 @@ PARSER.add_argument('-c', '--vpc-configuration',
                     type=str,
                     help='AWS VPC Configurations')
 
+PARSER.add_argument('--vpc-configuration-array',
+                    dest='array_vpc_configuration',
+                    required=False,
+                    default=os.path.join(os.getcwd(), 'array_vpc_configuration.yaml'),
+                    type=str,
+                    help='AWS VPC Configurations')
+
 PARSER.add_argument('-l', '--log-level',
                     dest='log_level',
+                    required=False,
                     choices=list(LOGGING_LEVELS.keys()),
                     default='info',
                     help='Log Levels')
 
 PARSER.add_argument('-o', '--output',
                     action=ValidateOutPutDir,
+                    required=False,
                     dest='output',
                     default=os.path.join(os.getcwd(), 'vpc_configuration_cidr_blocks.yaml'),
                     help='Output Location')
@@ -127,11 +268,16 @@ def main(args, vpc_configuration):
     subnets_maps_normalized = {}
     try:
         for account, vpc_config in vpc_configuration.items():
+            logger.error(account)
+            logger.error(vpc_config)
+            subnet_bits = vpc_configuration[account]['subnet_bits'] if vpc_configuration[account]['subnet_bits'] is not None else vpc_configuration[account]['cidr'].split('/')[-1]
             subnets_maps.update({
                 account: {
                     'cidr': vpc_configuration[account]['cidr'],
+                    'subnet_bits': vpc_configuration[account]['subnet_bits'] if vpc_configuration[account]['subnet_bits'] is not None else vpc_configuration[account]['cidr'].split('/')[:-1],
                     'region': vpc_configuration[account]['region'],
-                    'azs': ["{}{}".format(vpc_configuration[account]['region'], az) for az in vpc_configuration[account]['azs']],
+                    'azs': ["{}{}".format(vpc_configuration[account]['region'], az) for az in
+                            vpc_configuration[account]['azs']],
                     'subnets': [],
                     'azs_region_length': len(vpc_configuration[account]['azs']),
                     'total_subnets': sum([value for key, value in vpc_config['subnets'].items()]),
@@ -146,7 +292,7 @@ def main(args, vpc_configuration):
 
         for account, vpc_config in subnets_maps.items():
             cidr_blocks = generate_cidr_blocks(cidr=vpc_config['cidr'],
-                                               total_subnets_needed=vpc_config['total_subnets'])
+                                               total_subnets_needed=vpc_config['total_subnets']) #, subnet_bits=subnet_bits)
             for idx, subnet in enumerate(vpc_config['subnets']):
                 subnets_maps[account]['subnets'][idx][list(subnet.keys())[0]] = cidr_blocks[idx]
 
@@ -185,4 +331,11 @@ if __name__ == '__main__':
     with open(args_parser.vpc_configuration, 'r') as f:
         config = yml.load(f)
         logger.debug(config)
+
+    with open(args_parser.array_vpc_configuration, 'r') as f:
+        array_config = yml.load(f)
+        logger.debug(array_config)
+
+    # result = cidr_block_configurations_from_dict(array_config)
+
     main(args_parser, config)
