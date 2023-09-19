@@ -1,80 +1,56 @@
 ---
 sharedtools:
-  cidr: 100.100.0.0/16
-  region: us-east-2
+  cidr: 10.20.0.0/16
+  region: ca-tor
   azs:
-    - a
-    - b
+    - -1
+    - -2
   subnets:
-    private: 2
-    lambda: 2
-    database: 2
-nickel:
-  cidr: 100.101.0.0/16
-  region: us-east-1
-  azs:
-    - a
-    - b
-  subnets:
-    private: 2
-    lambda: 2
-sandbox:
-  cidr: 100.102.0.0/16
-  region: us-east-2
-  azs:
-    - a
-    - b
-  subnets:
+    public: 2
     private: 2
     lambda: 2
     database: 2
 dev:
-  cidr: 100.103.0.0/16
-  region: us-east-2
+  cidr: 10.21.0.0/16
+  region: ca-tor
   azs:
-    - a
-    - b
+    - -1
+    - -2
   subnets:
+    public: 2
     private: 2
     lambda: 2
     database: 2
-sit:
-  cidr: 100.104.0.0/16
-  region: us-east-2
+qa:
+  cidr: 10.22.0.0/16
+  region: ca-tor
   azs:
-    - a
-    - b
+    - -1
+    - -2
   subnets:
+    public: 2
     private: 2
     lambda: 2
     database: 2
-perf:
-  cidr: 100.105.0.0/16
-  region: us-east-2
+stage:
+  cidr: 10.23.0.0/16
+  region: ca-tor
   azs:
-    - a
-    - b
+    - -1
+    - -2
   subnets:
-    private: 2
-    lambda: 2
-    database: 2
-pre:
-  cidr: 100.106.0.0/16
-  region: us-east-2
-  azs:
-    - a
-    - b
-  subnets:
+    public: 2
     private: 2
     lambda: 2
     database: 2
 prod:
-  cidr: 100.107.0.0/16
-  region: us-east-2
+  cidr: 10.24.0.0/16
+  region: ca-tor
   azs:
-    - a
-    - b
+    - -1
+    - -2
   subnets:
+    public: 2
     private: 2
     lambda: 2
     database: 2

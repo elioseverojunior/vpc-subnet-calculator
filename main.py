@@ -182,7 +182,10 @@ if __name__ == '__main__':
     logger.setLevel(LOGGING_LEVELS[args_parser.log_level])
     logger.debug(logger)
 
-    with open(args_parser.vpc_configuration, 'r') as f:
-        config = yml.load(f)
-        logger.debug(config)
-    main(args_parser, config)
+    try:
+        with open(args_parser.vpc_configuration, 'r') as f:
+            config = yml.load(f)
+            logger.debug(config)
+        main(args_parser, config)
+    except Exception as ex:
+        logger.error(ex)
