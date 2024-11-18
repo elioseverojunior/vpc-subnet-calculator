@@ -1,0 +1,10 @@
+[project]
+name = "cidr-blocks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Elio Severo Junior", email = "elioseverojunior@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = []

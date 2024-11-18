@@ -1,106 +1,110 @@
 ---
 sharedtools:
   cidr: 10.20.0.0/16
-  region: ca-tor
+  region: us-east
   azs:
-    - ca-tor-1
-    - ca-tor-2
+    - us-east-1a
+    - us-east-1b
+    - us-east-1c
+    - us-east-1d
+    - us-east-1f
   subnets:
     public:
-      ca-tor-1: 10.20.0.0/19
-      ca-tor-2: 10.20.32.0/19
+      us-east-1a: 10.20.0.0/19
+      us-east-1b: 10.20.32.0/19
+      us-east-1c: 10.20.64.0/19
     private:
-      ca-tor-1: 10.20.64.0/19
-      ca-tor-2: 10.20.96.0/19
-    lambda:
-      ca-tor-1: 10.20.128.0/19
-      ca-tor-2: 10.20.160.0/19
+      us-east-1a: 10.20.96.0/19
+      us-east-1b: 10.20.128.0/19
+      us-east-1c: 10.20.160.0/19
     database:
-      ca-tor-1: 10.20.192.0/19
-      ca-tor-2: 10.20.224.0/19
-  azs_region_length: 2
+      us-east-1a: 10.20.192.0/19
+      us-east-1b: 10.20.224.0/19
+  azs_region_length: 5
   total_subnets: 8
 dev:
   cidr: 10.21.0.0/16
-  region: ca-tor
+  region: us-east-1
   azs:
-    - ca-tor-1
-    - ca-tor-2
+    - us-east-1-1a
+    - us-east-1-1b
+    - us-east-1-1c
+    - us-east-1-1d
+    - us-east-1-1f
   subnets:
     public:
-      ca-tor-1: 10.21.0.0/19
-      ca-tor-2: 10.21.32.0/19
+      us-east-1-1a: 10.21.0.0/19
+      us-east-1-1b: 10.21.32.0/19
+      us-east-1-1c: 10.21.64.0/19
     private:
-      ca-tor-1: 10.21.64.0/19
-      ca-tor-2: 10.21.96.0/19
-    lambda:
-      ca-tor-1: 10.21.128.0/19
-      ca-tor-2: 10.21.160.0/19
+      us-east-1-1a: 10.21.96.0/19
+      us-east-1-1b: 10.21.128.0/19
+      us-east-1-1c: 10.21.160.0/19
     database:
-      ca-tor-1: 10.21.192.0/19
-      ca-tor-2: 10.21.224.0/19
-  azs_region_length: 2
+      us-east-1-1a: 10.21.192.0/19
+      us-east-1-1b: 10.21.224.0/19
+  azs_region_length: 5
   total_subnets: 8
 qa:
   cidr: 10.22.0.0/16
-  region: ca-tor
+  region: us-east
   azs:
-    - ca-tor-1
-    - ca-tor-2
+    - us-east-1a
+    - us-east-1b
+    - us-east-1c
+    - us-east-1d
+    - us-east-1f
   subnets:
     public:
-      ca-tor-1: 10.22.0.0/19
-      ca-tor-2: 10.22.32.0/19
+      us-east-1a: 10.22.0.0/19
+      us-east-1b: 10.22.32.0/19
     private:
-      ca-tor-1: 10.22.64.0/19
-      ca-tor-2: 10.22.96.0/19
-    lambda:
-      ca-tor-1: 10.22.128.0/19
-      ca-tor-2: 10.22.160.0/19
+      us-east-1a: 10.22.64.0/19
+      us-east-1b: 10.22.96.0/19
     database:
-      ca-tor-1: 10.22.192.0/19
-      ca-tor-2: 10.22.224.0/19
-  azs_region_length: 2
-  total_subnets: 8
+      us-east-1a: 10.22.128.0/19
+      us-east-1b: 10.22.160.0/19
+  azs_region_length: 5
+  total_subnets: 6
 stage:
   cidr: 10.23.0.0/16
-  region: ca-tor
+  region: us-east
   azs:
-    - ca-tor-1
-    - ca-tor-2
+    - us-east-1a
+    - us-east-1b
+    - us-east-1c
+    - us-east-1d
+    - us-east-1f
   subnets:
     public:
-      ca-tor-1: 10.23.0.0/19
-      ca-tor-2: 10.23.32.0/19
+      us-east-1a: 10.23.0.0/19
+      us-east-1b: 10.23.32.0/19
     private:
-      ca-tor-1: 10.23.64.0/19
-      ca-tor-2: 10.23.96.0/19
-    lambda:
-      ca-tor-1: 10.23.128.0/19
-      ca-tor-2: 10.23.160.0/19
+      us-east-1a: 10.23.64.0/19
+      us-east-1b: 10.23.96.0/19
     database:
-      ca-tor-1: 10.23.192.0/19
-      ca-tor-2: 10.23.224.0/19
-  azs_region_length: 2
-  total_subnets: 8
+      us-east-1a: 10.23.128.0/19
+      us-east-1b: 10.23.160.0/19
+  azs_region_length: 5
+  total_subnets: 6
 prod:
   cidr: 10.24.0.0/16
-  region: ca-tor
+  region: us-east
   azs:
-    - ca-tor-1
-    - ca-tor-2
+    - us-east-1a
+    - us-east-1b
+    - us-east-1c
+    - us-east-1d
+    - us-east-1f
   subnets:
     public:
-      ca-tor-1: 10.24.0.0/19
-      ca-tor-2: 10.24.32.0/19
+      us-east-1a: 10.24.0.0/19
+      us-east-1b: 10.24.32.0/19
     private:
-      ca-tor-1: 10.24.64.0/19
-      ca-tor-2: 10.24.96.0/19
-    lambda:
-      ca-tor-1: 10.24.128.0/19
-      ca-tor-2: 10.24.160.0/19
+      us-east-1a: 10.24.64.0/19
+      us-east-1b: 10.24.96.0/19
     database:
-      ca-tor-1: 10.24.192.0/19
-      ca-tor-2: 10.24.224.0/19
-  azs_region_length: 2
-  total_subnets: 8
+      us-east-1a: 10.24.128.0/19
+      us-east-1b: 10.24.160.0/19
+  azs_region_length: 5
+  total_subnets: 6
